@@ -1,30 +1,37 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view />
+  <section id="message-app-main" :style="{ height: clientHieght + 'px' }">
+    <MainLayout v-if="layout" />
+    <EmptyLayout v-else />
+  </section>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import MainLayout from '@/layout/MainLayout.vue';
+import EmptyLayout from '@/layout/EmptyLayout.vue';
+import { computed, ref } from 'vue';
+export default {
+  setup() {
+    const layout = ref(true);
+    const clientHieght = computed(() => window.screen.height)
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+    return {
+      clientHieght,
+      layout
     }
+  },
+  components: {
+    MainLayout,
+    EmptyLayout
   }
+}
+</script>
+
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,900&display=swap');
+// TODO make dynamic definition of heights
+* {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  // overflow: hidden;
 }
 </style>
