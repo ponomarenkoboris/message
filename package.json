@@ -60,9 +60,8 @@
   "keywords": [
     "messenger",
     "vue.js",
-    "JS",
-    "Python"
+    "JS"
   ],
-  "author": "Boris Ponomarenko and Kirill Gervasov",
+  "author": "Boris Ponomarenko <borisponomarenko.dmi@gmail.com>",
   "license": "ISC"
 }

@@ -1,10 +1,12 @@
 <template>
     <div class="main-layout">
+        
         <header class="header-wrapper">
-            <h1 class="app-name">msbk</h1>
-            <h3>Profile</h3>
-            <h3>Credits</h3>
-            <h3>Settings</h3>
+            <router-link to="/Chat"><h1 class="app-name">msbk</h1></router-link>
+            <router-link to="/Profile"><h3>Profile</h3></router-link>
+            <router-link to="/Credits"><h3>Credits</h3></router-link>
+            <router-link to="/Settings"><h3>Settings</h3></router-link>
+           
             <div class="header-search-wrapper">
                 <input class="search__input" type="text" placeholder="Search...">
                 <button class="search__submit">
@@ -12,18 +14,13 @@
                 </button>
             </div>
         </header>
-        <Chat />
-        
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-import Chat from '@/pages/Chat.vue'
 export default {
     name: 'MainLayout',
-    components: {
-        Chat
-    }
 }
 </script>
 

@@ -2,10 +2,11 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Chat from '@/pages/Chat.vue';
 import Settings from '@/pages/Settings.vue';
 import Profile from '@/pages/Profile.vue';
+import Credits from '@/pages/Credits.vue';
 
 const routes = [
   {
-    path: "/",
+    path: "/Chat",
     name: "Chat",
     meta: { layout: 'MainLayout' },
     component: Chat
@@ -21,6 +22,12 @@ const routes = [
     name: 'Settings',
     meta: { layout: 'MainLayout' },
     component: Settings
+  },
+  {
+    path: '/Credits',
+    name: 'Credits',
+    meta: { layout: 'MainLayout' },
+    component: Credits
   }
 ];
 
