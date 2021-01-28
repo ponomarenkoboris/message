@@ -1,16 +1,17 @@
-const app = require('express')();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-
-const Vue = require('vue'); // import vue library
-const renderer = require('vue-server-renderer').createRenderer(); // import vue server renderer library
+const server = require('./socket.io/socket.js');
+const database = require('./database/mongodb.js');
 
 const PORT = process.env.PORT || 3000;
 
-io.on('connection', (socket) => {
-    console.log(socket, 'Socket connection sucsseed!');
-});
+async function start() {
+    try {
+        await database();
+        server.listen(PORT, () => {
+            console.log(`Server start work on port: ${PORT}`);
+        });
 
-app.listen(PORT, () => {
-    console.log(`Server start work on port: ${PORT}`);
-});
+    } catch (error) {
+        console.log(error);
+    }
+}
+start();

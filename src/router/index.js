@@ -8,7 +8,20 @@ import Registration from '@/pages/Registration.vue';
 
 const routes = [
   {
-    path: "/",
+    path: '/',
+    name: 'Login',
+    meta: { layout: 'EmptyLayout' },
+    component: Login
+  },
+  {
+    path: '/Registration',
+    name: 'Registration',
+    meta: { layout: 'EmptyLayout' },
+    component: Registration
+
+  },
+  {
+    path: "/Chat",
     name: "Chat",
     meta: { layout: 'MainLayout' },
     component: Chat
@@ -30,19 +43,6 @@ const routes = [
     name: 'Credits',
     meta: { layout: 'MainLayout' },
     component: Credits
-  },
-  {
-    path: '/Login',
-    name: 'Login',
-    meta: { layout: 'MainLayout' },
-    component: Login
-  },
-  {
-    path: '/Registration',
-    name: 'Registration',
-    meta: { layout: 'EmptyLayout' },
-    component: Registration
-
   }
 ];
 

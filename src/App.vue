@@ -1,7 +1,7 @@
 <template>
   <section id="message-app-main" :style="{ height: clientHieght + 'px' }">
-    <MainLayout v-if="layout" />
-    <EmptyLayout v-else />
+    <EmptyLayout v-if="layout"/>
+    <MainLayout v-else />
   </section>
 </template>
 
