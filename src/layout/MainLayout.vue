@@ -2,10 +2,10 @@
     <div class="main-layout">
         
         <header class="header-wrapper">
-            <router-link to="/Chat"><h1 class="app-name">msbk</h1></router-link>
-            <router-link to="/Profile"><h3>Profile</h3></router-link>
-            <router-link to="/Credits"><h3>Credits</h3></router-link>
-            <router-link to="/Settings"><h3>Settings</h3></router-link>
+            <router-link class="router-link" to="/"><h1 class="app-name">msbk</h1></router-link>
+            <router-link class="router-link" to="/Profile"><h3 class="header__link">Profile</h3></router-link>
+            <router-link class="router-link" to="/Credits"><h3 class="header__link">Credits</h3></router-link>
+            <router-link class="router-link" to="/Settings"><h3 class="header__link">Settings</h3></router-link>
            
             <div class="header-search-wrapper">
                 <input class="search__input" type="text" placeholder="Search...">
@@ -33,10 +33,13 @@ export default {
     padding-right: 200px;
     background-color: rgba($color: #000000, $alpha: .8);
 
-    .app-name, h3 {
+    .app-name, .header__link {
         cursor: pointer;
         padding: 30px;
         color: #ffffff;
+    }
+    .router-link{
+        text-decoration: none;
     }
 
     .header-search-wrapper {

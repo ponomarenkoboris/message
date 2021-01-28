@@ -3,10 +3,12 @@ import Chat from '@/pages/Chat.vue';
 import Settings from '@/pages/Settings.vue';
 import Profile from '@/pages/Profile.vue';
 import Credits from '@/pages/Credits.vue';
+import Login from '@/pages/Login.vue';
+import Registration from '@/pages/Registration.vue';
 
 const routes = [
   {
-    path: "/Chat",
+    path: "/",
     name: "Chat",
     meta: { layout: 'MainLayout' },
     component: Chat
@@ -28,6 +30,19 @@ const routes = [
     name: 'Credits',
     meta: { layout: 'MainLayout' },
     component: Credits
+  },
+  {
+    path: '/Login',
+    name: 'Login',
+    meta: { layout: 'MainLayout' },
+    component: Login
+  },
+  {
+    path: '/Registration',
+    name: 'Registration',
+    meta: { layout: 'EmptyLayout' },
+    component: Registration
+
   }
 ];
 

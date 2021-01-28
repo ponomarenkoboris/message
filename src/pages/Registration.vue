@@ -1,12 +1,10 @@
 <template>
-  <section class="app-settings">
-      <h1>Hellow Settigns!</h1>
-  </section>
+    <section class="registration-wrapper"></section>
 </template>
 
 <script>
 export default {
-    name: 'Settings'
+    name: 'Registration'
 }
 </script>
 
