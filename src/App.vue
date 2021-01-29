@@ -1,27 +1,26 @@
 <template>
   <section id="message-app-main" :style="{ height: clientHieght + 'px' }">
-    <EmptyLayout v-if="layout"/>
-    <MainLayout v-else />
+    <router-view></router-view>
   </section>
 </template>
 
 <script>
-import MainLayout from '@/layout/MainLayout.vue';
-import EmptyLayout from '@/layout/EmptyLayout.vue';
-import { computed, ref } from 'vue';
+// import MainLayout from '@/layout/MainLayout.vue';
+// import EmptyLayout from '@/layout/EmptyLayout.vue';
+import { computed } from 'vue';
 export default {
   setup() {
-    const layout = ref(true);
+    // const layout = ref(false);
     const clientHieght = computed(() => window.screen.height)
 
     return {
       clientHieght,
-      layout
+      // layout
     }
   },
   components: {
-    MainLayout,
-    EmptyLayout
+    // MainLayout,
+    // EmptyLayout
   }
 }
 </script>

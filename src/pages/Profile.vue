@@ -1,5 +1,6 @@
 <template>
   <section class="profile">
+    <router-view></router-view>
       <section class="info-wrapper">
           <img :src="User.avatar" alt="user-avatar" class="info user-avatar">
           <input type="text" class="info username" :placeholder="User.userName">

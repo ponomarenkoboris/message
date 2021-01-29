@@ -1,53 +1,62 @@
-import { createRouter, createWebHashHistory } from "vue-router";
-import Chat from '@/pages/Chat.vue';
-import Settings from '@/pages/Settings.vue';
-import Profile from '@/pages/Profile.vue';
-import Credits from '@/pages/Credits.vue';
-import Login from '@/pages/Login.vue';
-import Registration from '@/pages/Registration.vue';
-
+import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: '/',
-    name: 'Login',
+    name: 'emptyLayout',
     meta: { layout: 'EmptyLayout' },
-    component: Login
+    component: () => import('@/layout/EmptyLayout.vue'),
+    children: [
+      {
+        path: '/registration',
+        name: 'Registration',
+        meta: { layout: 'EmptyLayout' },
+        component: () => import('@/pages/Registration.vue')
+      },
+      {
+        path: '/login',
+        name: 'Login',
+        meta: { layout: 'EmptyLayout' },
+        component: () => import('@/pages/Login.vue')
+      },
+    ]
   },
   {
-    path: '/Registration',
-    name: 'Registration',
-    meta: { layout: 'EmptyLayout' },
-    component: Registration
-
-  },
-  {
-    path: "/Chat",
-    name: "Chat",
+    path: '/msb',
+    name: 'mainLyout',
     meta: { layout: 'MainLayout' },
-    component: Chat
-  },
-  {
-    path: "/Profile",
-    name: 'Profile',
-    meta: { layout: 'MainLayout' },
-    component: Profile
-  },
-  {
-    path: '/Settings',
-    name: 'Settings',
-    meta: { layout: 'MainLayout' },
-    component: Settings
-  },
-  {
-    path: '/Credits',
-    name: 'Credits',
-    meta: { layout: 'MainLayout' },
-    component: Credits
+    component: () => import('@/layout/MainLayout.vue'),
+    children: [
+      {
+        path: '/msb/chat',
+        name: 'Chat',
+        meta: { layout: 'MainLayout' },
+        component: () => import('@/pages/Chat.vue')
+      },
+      {
+        path: '/msb/profile',
+        name: 'Profile',
+        meta: { layout: 'MainLayout' },
+        component: () => import('@/pages/Profile.vue')
+      },
+      {
+        path: '/msb/credits',
+        name: 'Credits',
+        meta: { layout: 'MainLayout' },
+        component: () => import('@/pages/Credits.vue')
+      },
+      {
+        path: '/msb/settings',
+        name: 'Settings',
+        meta: { layout: 'MainLayout' },
+        component: () => import('@/pages/Settings.vue')
+      }
+    ]
   }
+  
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 });
 

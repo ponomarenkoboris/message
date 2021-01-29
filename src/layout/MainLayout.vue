@@ -1,11 +1,10 @@
 <template>
     <div class="main-layout">
-        
         <header class="header-wrapper">
-            <router-link class="router-link" to="/"><h1 class="app-name">msbk</h1></router-link>
-            <router-link class="router-link" to="/Profile"><h3 class="header__link">Profile</h3></router-link>
-            <router-link class="router-link" to="/Credits"><h3 class="header__link">Credits</h3></router-link>
-            <router-link class="router-link" to="/Settings"><h3 class="header__link">Settings</h3></router-link>
+            <h1 @click="route('chat')" class="app-name">msbk</h1>
+            <h3 @click="route('profile')" class="header__link">Profile</h3>
+            <h3 @click="route('credits')" class="header__link">Credits</h3>
+            <h3 @click="route('settings')" class="header__link">Settings</h3>
            
             <div class="header-search-wrapper">
                 <input class="search__input" type="text" placeholder="Search...">
@@ -19,8 +18,25 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+
 export default {
     name: 'MainLayout',
+    setup() {
+        const router = useRouter();
+        
+        const route = (link) => {  
+            // add hook to global paths config
+            router.beforeEach((to, from, failure) => {
+                if(failure) console.log('not fail');
+            }) 
+            router.push({ path: `/msb/${link}` });
+        }
+
+        return {
+            route
+        }
+    }
 }
 </script>
 
