@@ -24,12 +24,8 @@ export default {
     name: 'MainLayout',
     setup() {
         const router = useRouter();
-        
         const route = (link) => {  
-            // add hook to global paths config
-            router.beforeEach((to, from, failure) => {
-                if(failure) console.log('not fail');
-            }) 
+            console.log(link);
             router.push({ path: `/msb/${link}` });
         }
 
@@ -53,6 +49,13 @@ export default {
         cursor: pointer;
         padding: 30px;
         color: #ffffff;
+        &:hover {
+            border-radius: 20px;
+            background-color: rgba($color: #fff, $alpha: .2);
+        }
+    }
+    .app-name {
+        padding: 27px;
     }
     .router-link{
         text-decoration: none;

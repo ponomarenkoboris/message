@@ -18,36 +18,42 @@ const routes = [
         meta: { layout: 'EmptyLayout' },
         component: () => import('@/pages/Login.vue')
       },
+      {
+        path: '/error',
+        name: 'Error',
+        meta: { layout: 'EmptyLayout' },
+        component: () => import('@/pages/Error.vue')
+      }
     ]
   },
   {
     path: '/msb',
     name: 'mainLyout',
-    meta: { layout: 'MainLayout' },
+    meta: { layout: 'MainLayout', requiresAuth: true },
     component: () => import('@/layout/MainLayout.vue'),
     children: [
       {
         path: '/msb/chat',
         name: 'Chat',
-        meta: { layout: 'MainLayout' },
+        meta: { layout: 'MainLayout', requiresAuth: true },
         component: () => import('@/pages/Chat.vue')
       },
       {
         path: '/msb/profile',
         name: 'Profile',
-        meta: { layout: 'MainLayout' },
+        meta: { layout: 'MainLayout', requiresAuth: true },
         component: () => import('@/pages/Profile.vue')
       },
       {
         path: '/msb/credits',
         name: 'Credits',
-        meta: { layout: 'MainLayout' },
+        meta: { layout: 'MainLayout', requiresAuth: true },
         component: () => import('@/pages/Credits.vue')
       },
       {
         path: '/msb/settings',
         name: 'Settings',
-        meta: { layout: 'MainLayout' },
+        meta: { layout: 'MainLayout', requiresAuth: true },
         component: () => import('@/pages/Settings.vue')
       }
     ]
