@@ -6,10 +6,12 @@
 
 <script>
 export default {
-    name: 'Settings'
+  name: 'Settings'
 }
 </script>
 
 <style lang="scss" scoped>
-
+* {
+  // height: 100%;
+}
 </style>

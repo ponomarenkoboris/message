@@ -1,46 +1,36 @@
 <template>
-  <div>
-    <div>
-      <p class="text-xs-center">{{ text }}</p>
-      <hr>
+  <article class="message__wrapper">
+    <div class="message-header">
+      <b class="message__time">Time: {{ time }}</b>
+      <strong><h4 class="message__title">{{ name }}</h4></strong>
     </div>
-    <div class="wrap">
-      <div class="message">
-        <small><strong>{{ name }}</strong></small>
-      </div>
-    </div>
-  </div>
+    <p class="message__text">{{ text }}</p>
+  </article>
 </template>
 
 <script>
-import { ref } from 'vue';
 export default {
-  name: "Message",
-  setup() {
-    const name = ref('msbk');
-    const text = ref('hellow nsdk');
-
-    return {
-      name, text
-    }
+  name: 'Message',
+  props: {
+    name: String,
+    text: String,
+    time: Number
   }
-};
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+<style lang="scss" scoped>
+.message__wrapper {
+  max-width: 500px;
+  background-color: rgba($color: #fa03629f, $alpha: 1.0);
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 10px 15px;
+  border-radius: 50px;
+
+  .message-header {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 </style>

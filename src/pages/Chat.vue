@@ -6,15 +6,21 @@
                 <p class="chat__text">{{ chat.company.name }}: {{ chat.company.catchPhrase }}</p>
             </div>
         </section>
+        
         <section class="opened-chat-wrapper">
+            <article class="messages">
+                <Message v-for="mess in testMessages" :key="mess.text" :text="mess.text" :name="mess.name" :time="Date.now()" />
+            </article>
             <MessageForm />
         </section>
     </section>
 </template>
 
 <script>
-import MessageForm from '@/components/MessageForm.vue'
+import MessageForm from '@/components/MessageForm.vue';
+import Message from '@/components/Message.vue';
 import { computed, onMounted, reactive } from 'vue';
+
 export default {
     name: 'Chat',
     setup() {
@@ -22,6 +28,21 @@ export default {
         // reactive returns a reactive copy of the object
         const chats = reactive({});
         const windowHeight = computed(() => window.screen.height);
+        const testMessages = [
+            {
+                name: 'boris',
+                text: 'hellow world'
+            },
+            {
+                name: 'john',
+                text: 'ihefuewihhguirt'
+            },
+            {
+                name: 'ali',
+                text: 'kdjsk;lfgjsdjfd;'
+            }
+        ] 
+
         onMounted(async () => {
             try {
                 const response = await fetch('https://jsonplaceholder.typicode.com/users');
@@ -39,11 +60,13 @@ export default {
 
         return {
             windowHeight,
-            chats
+            chats,
+            testMessages
         }
     },
     components: {
-        MessageForm
+        MessageForm,
+        Message
     }
 }
 </script>
@@ -61,8 +84,9 @@ export default {
     width: 460px;
     background-color: rgba($color: #000000, $alpha: .7);
     box-sizing: border-box;
-    max-height: 850px; // TODO make dynamic definition of heights
+    max-height: 850px;
     overflow-y: scroll;
+    overflow-x: hidden;
 
     .chat-wrapper {
         width: 300px;
@@ -88,5 +112,9 @@ export default {
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
+
+    .messages {
+        
+    }
 }
 </style>
