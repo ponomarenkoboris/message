@@ -20,11 +20,13 @@
             </div>
         </header>
 
-        <router-view v-slot="component">
-            <transition name="page" mode="out-in">
-                <component :is="component.Component"></component>
-            </transition>
-        </router-view>
+        <section class="display">
+            <router-view v-slot="component">
+                <transition name="page" mode="out-in">
+                    <component :is="component.Component"></component>
+                </transition>
+            </router-view>
+        </section>
     </div>
 </template>
 
@@ -39,7 +41,7 @@ export default {
         const router = useRouter();
         const store = useStore();
 
-        const userName = computed(() => store.state.user.userName);
+        const userName = computed(() => store.state.userTest.userName);
 
         const route = (link) => {  
             router.push({ path: `/msb/${link}` });

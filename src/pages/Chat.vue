@@ -9,7 +9,7 @@
         
         <section class="opened-chat-wrapper">
             <article class="messages">
-                <Message v-for="mess in testMessages" :key="mess.text" :text="mess.text" :name="mess.name" :time="Date.now()" />
+                <Message v-for="mess in testMessages" :key="mess.text" :text="mess.text" :name="mess.name" :time="new Date().toLocaleString()" />
             </article>
             <MessageForm />
         </section>
@@ -20,28 +20,15 @@
 import MessageForm from '@/components/MessageForm.vue';
 import Message from '@/components/Message.vue';
 import { computed, onMounted, reactive } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
     name: 'Chat',
     setup() {
-        // ref returns a reactive and mutable ref object
-        // reactive returns a reactive copy of the object
         const chats = reactive({});
         const windowHeight = computed(() => window.screen.height);
-        const testMessages = [
-            {
-                name: 'boris',
-                text: 'hellow world'
-            },
-            {
-                name: 'john',
-                text: 'ihefuewihhguirt'
-            },
-            {
-                name: 'ali',
-                text: 'kdjsk;lfgjsdjfd;'
-            }
-        ] 
+        const store = useStore();
+        const testMessages = computed(() => store.state.messagesTest);
 
         onMounted(async () => {
             try {
@@ -113,8 +100,10 @@ export default {
     justify-content: flex-end;
     width: 100%;
 
-    .messages {
-        
+    .messages{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
 }
 </style>

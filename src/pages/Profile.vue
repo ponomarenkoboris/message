@@ -20,7 +20,7 @@ export default {
   name: 'Profile',
   setup() {
     const store = useStore();
-    const user = reactive({...store.state.user});
+    const user = reactive({...store.state.userTest});
 
     // varialble to bind with v-model
     const newUsername = ref('');

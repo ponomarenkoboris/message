@@ -14,16 +14,17 @@ export default {
   props: {
     name: String,
     text: String,
-    time: Number
+    time: String
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .message__wrapper {
-  max-width: 500px;
-  background-color: rgba($color: #fa03629f, $alpha: 1.0);
-  margin: 0;
+  min-width: 300px;
+  background-color: rgba($color: #053038fa, $alpha: 1.0);
+  color: #fff;
+  margin-right: 30px;
   margin-bottom: 30px;
   padding: 10px 15px;
   border-radius: 50px;
