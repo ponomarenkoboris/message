@@ -45,10 +45,10 @@ const routes = [
         component: () => import('@/pages/Profile.vue')
       },
       {
-        path: '/msb/credits',
-        name: 'Credits',
+        path: '/msb/appearence',
+        name: 'Appearence',
         meta: { layout: 'MainLayout', requiresAuth: true },
-        component: () => import('@/pages/Credits.vue')
+        component: () => import('@/pages/Appearence.vue')
       },
       {
         path: '/msb/settings',

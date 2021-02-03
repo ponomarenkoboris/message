@@ -53,9 +53,14 @@ export default {
         border-radius: 15px;
         background-color: rgba($color: #000000, $alpha: 0);
         color: #fff;
+        transition: .22s ease-in-out;
 
         &:hover{
             background-color: rgba($color: #fff, $alpha: .1);
+        }
+
+        &:active {
+            background-color: rgba($color: #000000, $alpha: 8); 
         }
     }
 }

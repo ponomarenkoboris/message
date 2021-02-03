@@ -7,7 +7,7 @@
             <div class="header-nav-wrapper">
                 <h1 @click="route('chat')" class="app_name" name="Chat">msbk</h1>
                 <h3 @click="route('profile')" class="header__link">Profile</h3>
-                <h3 @click="route('credits')" class="header__link">Credits</h3>
+                <h3 @click="route('appearence')" class="header__link">Appearence</h3>
                 <h3 @click="route('settings')" class="header__link">Settings</h3>
             
                 <div class="header-search-wrapper">
@@ -20,13 +20,11 @@
             </div>
         </header>
 
-        <section class="display">
-            <router-view v-slot="component">
-                <transition name="page" mode="out-in">
-                    <component :is="component.Component"></component>
-                </transition>
-            </router-view>
-        </section>
+        <router-view v-slot="component">
+            <transition name="page" mode="out-in">
+                <component :is="component.Component"></component>
+            </transition>
+        </router-view>
     </div>
 </template>
 
@@ -67,6 +65,7 @@ export default {
     .user-name-wrapper {
         margin-left: 100px;
         color: #fff;
+        cursor: default;
     }
 
     .header-nav-wrapper {
@@ -76,9 +75,14 @@ export default {
             cursor: pointer;
             padding: 30px;
             color: #ffffff;
+            border-radius: 20px;
+            transition: background-color .22s;
+
             &:hover {
-                border-radius: 20px;
                 background-color: rgba($color: #fff, $alpha: .2);
+            }
+            &:active {
+                background-color: rgba($color: #000000, $alpha: 8);
             }
         }
         .app_name {

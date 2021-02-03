@@ -1,5 +1,5 @@
 <template>
-    <section class="chat-page">
+    <section class="chat-page" v-cloak>
         <section v-if="chats" class="sidebar-wrapper">
             <div v-for="chat in chats" :key="chat.id" class="chat-wrapper">
                 <h4 class="chat__title">{{ chat.name }}</h4>
@@ -9,9 +9,9 @@
         
         <section class="opened-chat-wrapper">
             <article class="messages">
-                <Message v-for="mess in testMessages" :key="mess.text" :text="mess.text" :name="mess.name" :time="new Date().toLocaleString()" />
+                <Message v-for="mess in testMessages" :key="mess.text" :text="mess.text" :name="mess.name" :time="new Date().toLocaleString()"/>
             </article>
-            <MessageForm />
+            <MessageForm v-cloak/>
         </section>
     </section>
 </template>
@@ -59,6 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// TODO dinamic hieght and width
 .chat-page {
     display: flex;
     flex-direction: row;
@@ -71,7 +72,7 @@ export default {
     width: 460px;
     background-color: rgba($color: #000000, $alpha: .7);
     box-sizing: border-box;
-    max-height: 850px;
+    height: 850px;
     overflow-y: scroll;
     overflow-x: hidden;
 

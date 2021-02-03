@@ -19,7 +19,6 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,900&display=swap');
-
 * {
   margin: 0;
   font-family: 'Lato', sans-serif;
