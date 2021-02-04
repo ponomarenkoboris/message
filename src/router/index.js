@@ -18,12 +18,6 @@ const routes = [
         meta: { layout: 'EmptyLayout' },
         component: () => import('@/pages/Login.vue')
       },
-      {
-        path: '/error',
-        name: 'Error',
-        meta: { layout: 'EmptyLayout' },
-        component: () => import('@/pages/Error.vue')
-      }
     ]
   },
   {

@@ -46,16 +46,11 @@
     },
     "rules": {}
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
   "description": "## Project setup ``` npm install ```",
   "main": "babel.config.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ponomarenkoboris/msbk.git"
+    "url": "https://github.com/ponomarenkoboris/msb.git"
   },
   "keywords": [
     "messenger",

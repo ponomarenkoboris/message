@@ -4,20 +4,35 @@
             <h1 class="registartion__title">Registration</h1>
             <article class="registration__form">
                 <form class="reg">
-                    <input type="text" class="username" placeholder="Enter your name and second name.">
-                    <input type="text" class="userId" placeholder="Enter your user ID.">
-                    <input type="text" class="userEmail" placeholder="Enter your email.">
+                    <input type="text" class="username" placeholder="Enter your name." v-model="userData.name">
+                    <input type="text" class="userId" placeholder="Enter your Id." v-model="userData.userId">
+                    <input type="text" class="userEmail" placeholder="Enter your email." v-model="userData.email">
                     <p class="checkPolicy"><input type="radio" value="politicsAgrimant" id="politicsAgrimant"> You agree to the privacy policy.</p>
                 </form>
-                <button class="registerBTN">Create new user!</button>
+                <button class="registerBTN" @click="registartion">Create new user!</button>
             </article>
         </article>
     </section>
 </template>
 
 <script>
+import { useRegistration } from '@/use/registration';
+import { reactive } from 'vue';
+
 export default {
-    name: 'Registration'
+    name: 'Registration',
+    setup() {
+        const userData = reactive({ name: '', email: '', userId: '' });
+
+        async function registartion() {
+            await useRegistration(userData);
+        }
+
+        return {
+            userData,
+            registartion
+        }
+    }
 }
 </script>
 

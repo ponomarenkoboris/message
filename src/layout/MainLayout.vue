@@ -10,13 +10,7 @@
                 <h3 @click="route('appearence')" class="header__link">Appearence</h3>
                 <h3 @click="route('settings')" class="header__link">Settings</h3>
             
-                <div class="header-search-wrapper">
-                    <input class="search__input" type="text" placeholder="Search...">
-                    <button class="search__submit">
-                        <img class="search-btn__img" src="../../public/img/systemImages/search.svg" alt="magnifying-glass">
-                    </button>
-
-                </div>
+                <Search />
             </div>
         </header>
 
@@ -29,17 +23,24 @@
 </template>
 
 <script>
+import Search from '@/components/Search.vue';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+// import { useAuth } from '@/use/auth';
 
 export default {
     name: 'MainLayout',
     setup() {
         const router = useRouter();
         const store = useStore();
-
         const userName = computed(() => store.state.userTest.userName);
+
+        // check autorization
+        // onBeforeRouteUpdate(() => {
+        //     const isAuth = useAuth(); 
+        //     if (!isAuth) router.push('/login');
+        // });
 
         const route = (link) => {  
             router.push({ path: `/msb/${link}` });
@@ -49,6 +50,9 @@ export default {
             route,
             userName
         }
+    },
+    components: {
+        Search
     }
 }
 </script>
@@ -88,26 +92,7 @@ export default {
         .app_name {
             padding: 27px;
         }
-        .header-search-wrapper {
-            .search__input {
-                border: none;
-                padding: 5px 10px;
-                max-width: 100px;
-                border-radius: 50px;
-            }
-            .search__submit {
-                cursor: pointer;
-                background-color: #fff;
-                border: none;
-                position: relative;
-                top: 2.5px;
-                left: -34px;
-
-                .search-btn__img {
-                    height: 15px;
-                }
-            }
-        }
+        
 
     }
 }

@@ -7,9 +7,9 @@
             </article>
             <article class="entry-form">
                 <form class="login-form" name="loginForm">
-                    <input type="text" class="email-form" :placeholder="email">
-                    <input type="text" class="password-form" :placeholder="pass">
-                    <button class="submitBtn">Log In</button>
+                    <input type="text" class="email-form" placeholder="Enter your email..." v-model="userData.email">
+                    <input type="text" class="password-form" placeholder="Enter your password..." v-model="userData.pass">
+                    <button class="submitBtn" @click.prevent="login">Log In</button>
                 </form>
             </article>
         </section>
@@ -17,16 +17,21 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { reactive } from 'vue'
+import { useLogin } from '@/use/login';
+
 export default {
     name: 'Login',
     setup() {
-        const email = ref('Enter your email...');
-        const pass = ref('Enter your password...');
+        const userData = reactive({ email: '', pass: '' })
+
+        async function login() {
+            await useLogin(userData)
+        }
 
         return {
-            email,
-            pass,
+            userData,
+            login
         }
     }
 }
@@ -47,6 +52,7 @@ export default {
     }
 
     .link-to-registration {
+        cursor: pointer;
         text-decoration: none;
         color: inherit;
         padding: 10px;
@@ -92,10 +98,6 @@ export default {
             padding: 10px;
             font-size: 1rem;
             cursor: pointer;
-
-            &:hover {
-
-            }
         }
     }
 }
