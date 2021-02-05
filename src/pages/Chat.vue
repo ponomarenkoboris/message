@@ -1,17 +1,17 @@
 <template>
-    <section class="chat-page" v-cloak>
+    <section class="chat-page" v-cloak @click="showerror">
         <section v-if="chats" class="sidebar-wrapper">
             <div v-for="chat in chats" :key="chat.id" class="chat-wrapper">
-                <h4 class="chat__title">{{ chat.name }}</h4>
+                <h4 class="chat__title">{{ chat.name }} &#8195;<span class="new-messege-counter">{{ messageCount }}</span></h4>
                 <p class="chat__text">{{ chat.company.name }}: {{ chat.company.catchPhrase }}</p>
             </div>
         </section>
         
         <section class="opened-chat-wrapper">
             <article class="messages">
-                <Message v-for="mess in testMessages" :key="mess.text" :text="mess.text" :name="mess.name" :time="new Date().toLocaleString()"/>
+                <Message v-for="mess in testMessages" :key="mess.text" :text="mess.text" :name="mess.name" :time="new Date().toLocaleTimeString()"/>
             </article>
-            <MessageForm v-cloak/>
+            <MessageForm />
         </section>
     </section>
 </template>
@@ -19,7 +19,7 @@
 <script>
 import MessageForm from '@/components/MessageForm.vue';
 import Message from '@/components/Message.vue';
-import { computed, onMounted, reactive } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
@@ -29,6 +29,10 @@ export default {
         const windowHeight = computed(() => window.screen.height);
         const store = useStore();
         const testMessages = computed(() => store.state.messagesTest);
+
+        //this value will be computed, then user get new message
+        const messageCount = ref(1);
+        
 
         onMounted(async () => {
             try {
@@ -48,7 +52,8 @@ export default {
         return {
             windowHeight,
             chats,
-            testMessages
+            testMessages,
+            messageCount
         }
     },
     components: {
@@ -86,8 +91,19 @@ export default {
             background-color: rgba($color: #000000, $alpha: .4);
         }
         .chat__title {
+            display: flex;
+            justify-content: space-between;
             padding-bottom: 10px;
             color: rgba($color: #ffffff, $alpha: 1);
+
+            .new-messege-counter {
+                min-width: 20px;
+                padding: 1px 3px;
+                text-align: center;
+                color: #000;
+                background-color: #fff;
+                border-radius: 50px 50px;
+            }
         }
         .chat__text {
             color: rgba($color: #ffffff, $alpha: .5);
@@ -107,4 +123,5 @@ export default {
         align-items: flex-end;
     }
 }
+
 </style>

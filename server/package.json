@@ -4,12 +4,15 @@
   "description": "server for messendger",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./index.js",
-    "database": "node ./database/mongodb.js"
+    "dev": "nodemon ./server.js",
+    "database": "node ./database/mongodb.js",
+    "start": "node ./server.js"
   },
   "keywords": [
     "js",
-    "express"
+    "express",
+    "socket.io",
+    "mongoDB"
   ],
   "repository": {
     "type": "git",

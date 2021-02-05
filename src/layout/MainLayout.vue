@@ -14,6 +14,10 @@
             </div>
         </header>
 
+        <transition name="error">
+            <Error v-if="showError" :status="404" :message="'Here will be an arror message...'" @hideError="hideMessege"/>
+        </transition>
+
         <router-view v-slot="component">
             <transition name="page" mode="out-in">
                 <component :is="component.Component"></component>
@@ -24,7 +28,9 @@
 
 <script>
 import Search from '@/components/Search.vue';
-import { computed } from 'vue';
+import Error from '@/components/ErrorMessage.vue'
+
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 // import { useAuth } from '@/use/auth';
@@ -32,6 +38,12 @@ import { useStore } from 'vuex';
 export default {
     name: 'MainLayout',
     setup() {
+        const showError = ref(false);
+
+        function hideMessege() {
+            showError.value = !showError.value
+        }
+        
         const router = useRouter();
         const store = useStore();
         const userName = computed(() => store.state.userTest.userName);
@@ -48,11 +60,14 @@ export default {
 
         return {
             route,
-            userName
+            userName,
+            hideMessege,
+            showError,
         }
     },
     components: {
-        Search
+        Search,
+        Error
     }
 }
 </script>
@@ -76,6 +91,8 @@ export default {
         display: flex;
         align-items: center;
         .app_name, .header__link {
+            margin-left: 10px;
+            margin-right: 10px;
             cursor: pointer;
             padding: 30px;
             color: #ffffff;
@@ -92,8 +109,6 @@ export default {
         .app_name {
             padding: 27px;
         }
-        
-
     }
 }
 // transitions
@@ -105,5 +120,15 @@ export default {
 }
 .page-enter-to, .page-leave {
     opacity: 1;
+}
+// error transition
+.error-enter-active,
+.error-leave-active {
+    opacity: 1;
+    transition: .22s ease-in-out;
+}
+.error-enter-from,
+.enter-leave-to {
+    opacity: 0;
 }
 </style>

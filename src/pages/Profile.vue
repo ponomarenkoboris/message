@@ -2,7 +2,7 @@
   <section class="profile">
     <router-view></router-view>
       <section class="info-wrapper">
-          <img :src="user.avatar_url || profile_src" alt="user-avatar" class="info user-avatar">
+          <img :src="user.avatar_url || profile_src || ''" alt="user-avatar" class="info user-avatar">
           <input type="file" class="info file" id="file" @change="uploadAndRenderImg"/>
           <div class="info file__btn">
             <button class="getImg" @click="choosePhoto">Choose new photo</button>

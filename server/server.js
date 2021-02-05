@@ -1,4 +1,4 @@
-const server = require('./socket.io/socket.js');
+const server = require('./controllers.js');
 const mongoose = require('mongoose');
 require('dotenv').config({ path: './.env' });
 
