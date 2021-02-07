@@ -22,6 +22,28 @@ export default createStore({
         name: 'ali',
         text: 'kdjsk;lfgjsdjfd;'
       }
+    ],
+    fonts: [
+      {
+        name: 'Roboto',
+        example: 'Expamle'
+      },
+      {
+        name: 'Lato',
+        example: 'Expamle'
+      },
+      {
+        name: 'Noto Sans JP',
+        example: 'Expamle'
+      },
+      {
+        name: 'Hammersmith One',
+        example: 'Expamle'
+      },
+      {
+        name: 'Raleway',
+        example: 'Expamle'
+      }
     ]
   },
   mutations: {

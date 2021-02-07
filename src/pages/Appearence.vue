@@ -2,32 +2,16 @@
 <template>
   <section class="appearence">
     <article class="font-style-wrapper">
-      <h3 class="font-style__title">select font</h3>
+      <h3 class="font-style__title">Select font</h3>
       <div class="font-style__selector" @click="isOpen = !isOpen">
         <span class="font-style__placeholder">Roboto</span>
         <p>&times;</p>
       </div>
       <div class="font-style__dropdown" v-if="isOpen">
         <ul class="fonts-list">
-          <li class="font-wrapper">
-            <p class="font-name">Loto</p>
-            <p class="font-example">example</p>
-          </li>
-          <li class="font-wrapper">
-            <p class="font-name">Loto</p>
-            <p class="font-example">example</p>
-          </li>
-          <li class="font-wrapper">
-            <p class="font-name">Loto</p>
-            <p class="font-example">example</p>
-          </li>
-          <li class="font-wrapper">
-            <p class="font-name">Loto</p>
-            <p class="font-example">example</p>
-          </li>
-          <li class="font-wrapper">
-            <p class="font-name">Loto</p>
-            <p class="font-example">example</p>
+          <li v-for="font in fonts" :key="font.name" class="font-wrapper">
+            <p class="font-name">{{ font.name }}</p>
+            <p class="font-example">{{ font.example }}</p>
           </li>
         </ul>
       </div>
@@ -58,13 +42,17 @@
 
 <script>
 import ColorPicker from '@/components/ColorPicker.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
   name: 'Appearence',
   setup() {
     const isOpen = ref(false);
     const profile_src = ref('');
+    const store = useStore();
+    const fonts = computed(() => store.state.fonts);
+
     // select photo (click on button)
     function choosePhoto() {
       const accept = ['.png', '.jpg', '.jpeg'];
@@ -72,6 +60,7 @@ export default {
       input.setAttribute('accept', accept.join(','));
       input.click();
     }
+
     // select photo (upload on servise)
     function uploadAndRenderImg(e) {
       if (!e.target.files.length) return;
@@ -88,7 +77,8 @@ export default {
       choosePhoto,
       uploadAndRenderImg,
       profile_src,
-      isOpen
+      isOpen,
+      fonts
     }
   },
   components: {
@@ -99,6 +89,7 @@ export default {
 
 <style lang="scss" scoped>
 .appearence {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -147,6 +138,7 @@ export default {
         padding: 0;
 
         .font-wrapper {
+          cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -160,6 +152,13 @@ export default {
   .chat-background__wrapper {
     margin-top: 100px;
   } 
+
+  .pickers-wrapper{
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+  }
 
 }
 </style>

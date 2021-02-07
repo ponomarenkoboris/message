@@ -17,7 +17,7 @@ export default {
         const name = computed(() => store.state.userTest.userName)
 
         function sendHandler() {
-            if (!inputValue.value) return
+            if (!inputValue.value || inputValue.value.match('[<>{}]')) return inputValue.value = '';
             store.commit('addMessage', { name, text: inputValue.value });
             inputValue.value = '';
         }
@@ -37,8 +37,9 @@ export default {
     .message-input {
         height: 30px;
         outline: 0;
-        width: 95%;
-        background-color: inherit;
+        width: 94%;
+        padding: 0 10px;
+        background-color: rgba($color: #000000, $alpha: .3);
         color: #ffffff;
         border: none;
         border-bottom: 1px solid #ffffff;        
