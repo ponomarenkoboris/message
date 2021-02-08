@@ -9,6 +9,7 @@ export default createStore({
       userEmail: 'boris@gmail.com',
       phoneNumber: '+7-903-268-29-60'
     },
+    // delete while server will be done
     messagesTest: [
       {
         name: 'boris',
@@ -26,23 +27,28 @@ export default createStore({
     fonts: [
       {
         name: 'Roboto',
-        example: 'Expamle'
+        example: 'Example',
+        active: false
       },
       {
         name: 'Lato',
-        example: 'Expamle'
+        example: 'Example',
+        active: false
       },
       {
         name: 'Noto Sans JP',
-        example: 'Expamle'
+        example: 'Example',
+        active: true
       },
       {
         name: 'Hammersmith One',
-        example: 'Expamle'
+        example: 'Example',
+        active: false
       },
       {
         name: 'Raleway',
-        example: 'Expamle'
+        example: 'Example',
+        active: false
       }
     ]
   },
@@ -64,6 +70,12 @@ export default createStore({
     },
     addMessage(state, newMessage) {
       state.messagesTest.push(newMessage);
+    },
+    changeFont(state, name) {
+      state.fonts.forEach(item => {
+        if (item.name === name) return item.active = true;
+        item.active = false;
+      });
     }
   },
   actions: {},

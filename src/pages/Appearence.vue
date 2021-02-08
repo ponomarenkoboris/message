@@ -9,31 +9,31 @@
       </div>
       <div class="font-style__dropdown" v-if="isOpen">
         <ul class="fonts-list">
-          <li v-for="font in fonts" :key="font.name" class="font-wrapper">
+          <li v-for="font in fonts" :key="font.name" class="font-wrapper" @click="fontHandler(font.name)">
             <p class="font-name">{{ font.name }}</p>
-            <p class="font-example">{{ font.example }}</p>
+            <p class="font-example" :style="{fontFamily: font.name}">{{ font.example }}</p>
           </li>
         </ul>
       </div>
     </article>
     <article class="chat-background__wrapper">
       <div class="background-img__wrapper">
-        <img :src="profile_src || ''" alt="Chat background" class="background-img" @change="uploadAndRenderImg">
+        <img :src="background_src" alt="Chat background" class="background-img">
       </div>
-      <input type="file" id="file">
+      <input type="file" id="file" hidden @change="uploadAndRenderImg">
       <button class="submitChatBackground" @click="choosePhoto">Submit</button>
     </article>
     <section class="pickers-wrapper">
       <article class="main-theme__warpper">
-        <h3 class="theme__title">Choose color theme</h3>
+        <h3 class="theme__title">Choose main color theme</h3>
         <div class="theme__color-picker">
-          <ColorPicker />
+          <ColorPicker :id="1"/>
         </div>
       </article>
       <article class="chat-theme__warapper">
         <h3 class="theme__title">Choose chat theme</h3>
         <div class="theme__color-picker">
-          <ColorPicker />
+          <ColorPicker :id="2"/>
         </div>
       </article>
     </section>
@@ -44,15 +44,15 @@
 import ColorPicker from '@/components/ColorPicker.vue';
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
+import clearImage from '../../public/img/systemImages/noimage.jpeg';
 
 export default {
   name: 'Appearence',
   setup() {
     const isOpen = ref(false);
-    const profile_src = ref('');
+    const background_src = ref(clearImage);
     const store = useStore();
     const fonts = computed(() => store.state.fonts);
-
     // select photo (click on button)
     function choosePhoto() {
       const accept = ['.png', '.jpg', '.jpeg'];
@@ -64,21 +64,28 @@ export default {
     // select photo (upload on servise)
     function uploadAndRenderImg(e) {
       if (!e.target.files.length) return;
-      if (!e.target.files[0].type.match('image')) return;
+      if(!e.target.files[0].type.match('image')) return;
+      
       const reader = new FileReader();
       reader.onload = event => {
-        profile_src.value = event.target.result;
+        background_src.value = event.target.result;
         // TODO must be uploaded to localStorage
       }
       reader.readAsDataURL(e.target.files[0]);
     }
-    
+
+    // change app font
+    function fontHandler(name) {
+      store.commit('changeFont', name)
+    }
+
     return {
       choosePhoto,
       uploadAndRenderImg,
-      profile_src,
+      background_src,
       isOpen,
-      fonts
+      fonts,
+      fontHandler
     }
   },
   components: {
@@ -144,6 +151,10 @@ export default {
           justify-content: space-between;
           padding: 10px 5px;
           border-bottom: 1px solid #ccc;
+
+          &:hover {
+            background: rgba($color: #ccc, $alpha: .2)
+          }
         }
       }
     }
