@@ -1,31 +1,43 @@
 <template>
   <article class="container" :id="id">
-    <canvas id="color-picker"></canvas>
     <div class="info">
-        <h3>Selected Color</h3>
-        <div class="selected"></div>
+      <div class="input-wrapper">
+        <input type="color" class="color1" @input="changeColor"/>
+        <input type="color" class="color2" @input="changeColor"/>
+      </div>
+      <h3>Selected Color</h3>
+      <div class="selected"></div>
     </div>
+    <div class="gradient-mixer"></div>
   </article>
 </template>
 
 <script>
-import { Picker } from '@/scripts/colorPicker.js';
-import { onMounted } from 'vue';
-// TODO fix drag and drop bug
+import { reactive } from 'vue';
+
 export default {
   name: 'ColorPicker',
   props: {
     id: Number
   },
-  setup() {
-    onMounted(() => {
-      const picker = new Picker(document.querySelector('#color-picker'), 250, 250);
-      setInterval(() => picker.draw(), 1);
-      picker.onChange((color) => {
-        let selected = document.querySelector('.selected');
-        selected.style.background = `rgb(${color.r}, ${color.g}, ${color.b})`;
-      });
-    })
+  setup(props) {
+    
+    const theme = reactive({});
+
+    const changeColor = () => {
+      const color1 = document.querySelector('.color1').value;
+      const color2 = document.querySelector('.color2').value;
+      const selected = document.querySelector('.selected');
+      selected.style.background = "linear-gradient(to right, " + color1 + ", " + color2 + ")";
+      theme.color1 = color1;
+      theme.color2 = color2;
+      if (props.id === 1) console.log('main theme');
+      if (props.id === 2) console.log('messege theme');
+    }
+
+    return {
+      changeColor
+    }
   }
 }
 </script>
@@ -37,6 +49,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 200px;
 
   #color-picker {
     border: 3px solid rgba(15, 15, 15, .2);
@@ -46,13 +59,18 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+    .input-wrapper {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+    }
   }
   .selected {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    border: 2px solid rgba(15, 15, 15, .2);
+    width: 250px;
+    height: 100px;
+    background: #000;
   }
 }
-
 </style>
