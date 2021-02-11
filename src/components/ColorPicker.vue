@@ -2,41 +2,59 @@
   <article class="container" :id="id">
     <div class="info">
       <div class="input-wrapper">
-        <input type="color" class="color1" @input="changeColor"/>
-        <input type="color" class="color2" @input="changeColor"/>
+        <div class="left-side-color">
+          <input type="color" :id="firstColor" class="leftColor" @input="changeColor"/>
+          <p>Left side</p>
+        </div>
+        <div class="right-side-color">
+          <input type="color" :id="secondColor" class="rightColor" @input="changeColor"/>
+          <p>Right side</p>
+        </div>
       </div>
-      <h3>Selected Color</h3>
-      <div class="selected"></div>
+      <div class="change-wrapper">
+        <h3>Selected Color</h3>
+        <div :id="selectedArea" class="selected"></div>
+        <button v-if="notDefaultColor" class="btn-submit-color" @click="submitColor">Pick color</button>
+      </div>
     </div>
-    <div class="gradient-mixer"></div>
   </article>
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
 export default {
   name: 'ColorPicker',
   props: {
-    id: Number
+    id: String,
+    firstColor: String,
+    secondColor: String,
+    selectedArea: String
   },
   setup(props) {
     
     const theme = reactive({});
+    const notDefaultColor = ref(false)
 
     const changeColor = () => {
-      const color1 = document.querySelector('.color1').value;
-      const color2 = document.querySelector('.color2').value;
-      const selected = document.querySelector('.selected');
-      selected.style.background = "linear-gradient(to right, " + color1 + ", " + color2 + ")";
-      theme.color1 = color1;
-      theme.color2 = color2;
-      if (props.id === 1) console.log('main theme');
-      if (props.id === 2) console.log('messege theme');
+      const leftColor = document.querySelector(`#${props.firstColor}`).value;
+      const rightColor = document.querySelector(`#${props.secondColor}`).value;
+      notDefaultColor.value = true;
+      const selected = document.querySelector(`#${props.selectedArea}`);
+      selected.style.background = "linear-gradient(to right, " + leftColor + ", " + rightColor + ")";
+      theme.leftColor = leftColor;
+      theme.rightColor = rightColor;
+    }
+
+    const submitColor = () => {
+      if (props.id === 'main') console.log('main theme: ', theme);
+      if (props.id === 'message') console.log('messege theme: ', theme);
     }
 
     return {
-      changeColor
+      changeColor,
+      submitColor,
+      notDefaultColor
     }
   }
 }
@@ -51,9 +69,6 @@ export default {
   align-items: center;
   margin-bottom: 200px;
 
-  #color-picker {
-    border: 3px solid rgba(15, 15, 15, .2);
-  }
   .info {
     width: 12em;
     display: flex;
@@ -65,12 +80,60 @@ export default {
       justify-content: space-between;
       width: 100%;
 
+      .left-side-color, .right-side-color{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .leftColor, .rightColor {
+          cursor: pointer;
+          border: none;
+          padding: 0;
+          width: 75px;
+          height: 50px;
+        }
+
+        & > p {
+          cursor: default;
+          font-size: .9rem;
+        }
+      }
+
     }
   }
-  .selected {
-    width: 250px;
-    height: 100px;
-    background: #000;
+  .change-wrapper {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > h3, .selected {
+      margin-top: 10px;
+    }
+
+    .selected {
+      width: 250px;
+      height: 100px;
+      background: #000;
+    }
+
+    .btn-submit-color {
+      cursor: pointer;
+      margin-top: 30px;
+      padding: 10px 15px;
+      outline: none;
+      border: none;
+      border-radius: 20px;
+
+      &:hover {
+        background: rgba($color: #000000, $alpha: .2);
+      }
+      &:active {
+        background: rgba($color: #ccc, $alpha: .4);
+      }
+
+    }
   }
+  
 }
 </style>

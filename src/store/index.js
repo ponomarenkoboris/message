@@ -28,7 +28,7 @@ export default createStore({
       {
         name: 'Roboto',
         example: 'Example',
-        active: false
+        active: true
       },
       {
         name: 'Lato',
@@ -38,7 +38,7 @@ export default createStore({
       {
         name: 'Noto Sans JP',
         example: 'Example',
-        active: true
+        active: false
       },
       {
         name: 'Hammersmith One',

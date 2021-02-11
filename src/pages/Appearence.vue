@@ -1,5 +1,5 @@
 <template>
-  <section class="appearence" @click="fontSelector = false, mainPicker = false, messPicker = false">
+  <section class="appearence" @click="fontSelector = false">
     <article class="font-style-wrapper">
       <h3 class="font-style__title">Select font</h3>
       <div class="font-style__selector" @click="selectorHandler">
@@ -15,24 +15,35 @@
         </ul>
       </div>
     </article>
-    <article class="chat-background__wrapper">
-      <div class="background-img__wrapper">
-        <img :src="background_src" alt="Chat background" class="background-img">
-      </div>
-      <input type="file" id="file" hidden @change="uploadAndRenderImg">
-      <button class="submitChatBackground" @click="choosePhoto">Choose chat background image</button>
-    </article>
-    <section class="pickers-wrapper">
+    <section class="chat-config-wrapper">
       <article class="main-theme__warpper">
-        <h3 class="theme__title" @click="mainThemeHandler">Choose main color theme</h3>
+        <h3 class="theme__title">Main color theme</h3>
         <div class="theme__color-picker">
-          <ColorPicker v-if="mainPicker" :id="1"/>
+          <ColorPicker
+            :id="'main'" 
+            :firstColor="'firstPickerColor1'"
+            :secondColor="'firstPickerColor2'" 
+            :selectedArea="'firstPickerSelected'"
+          />
         </div>
       </article>
+      <article class="chat-background__wrapper">
+        <div class="background-img__wrapper">
+          <img :src="background_src" alt="Chat background" class="background-img">
+        </div>
+        <input type="file" id="file" hidden @change="uploadAndRenderImg">
+        <button class="submitChatBackground" @click="choosePhoto">Chat background image</button>
+      </article>
+      
       <article class="chat-theme__warapper">
-        <h3 class="theme__title" @click="messThemeHandler">Choose chat theme</h3>
+        <h3 class="theme__title">Chat color theme</h3>
         <div class="theme__color-picker">
-          <ColorPicker v-if="messPicker" :id="2"/>
+          <ColorPicker
+            :id="'message'"
+            :firstColor="'secondPickerColor1'"
+            :secondColor="'secondPickerColor2'" 
+            :selectedArea="'secondPickerSelected'"
+          />
         </div>
       </article>
     </section>
@@ -56,13 +67,9 @@ export default {
 
     // controllers
     const fontSelector = ref(false);
-    const mainPicker = ref(false);
-    const messPicker = ref(false);
 
     // controllers func 
-    const selectorHandler = () => setTimeout(() => fontSelector.value = !fontSelector.value, 0);
-    const mainThemeHandler = () => setTimeout(() => mainPicker.value = !mainPicker.value, 0);
-    const messThemeHandler = () => setTimeout(() => messPicker.value = !messPicker.value, 0);
+    const selectorHandler = () => setTimeout(() => fontSelector.value = true, 0);
     
     // select photo (click on button)
     function choosePhoto() {
@@ -90,7 +97,6 @@ export default {
       store.commit('changeFont', name);
     }
     
-
     return {
       choosePhoto,
       uploadAndRenderImg,
@@ -99,11 +105,7 @@ export default {
       fontName,
       fonts,
       fontHandler,
-      selectorHandler,
-      mainPicker,
-      messPicker,
-      mainThemeHandler,
-      messThemeHandler,
+      selectorHandler
     }
   },
   components: {
@@ -184,49 +186,49 @@ export default {
     }
   }
 
-  .chat-background__wrapper {
-    margin-top: 100px;
+  .chat-config-wrapper {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    .submitChatBackground {
-      margin-top: 20px;
-      outline: none;
-      cursor: pointer;
-      padding: 5px 10px;
-      border-radius: 20px;
-      border: none;  
+    justify-content: space-around;
 
-      &:hover {
-        background: rgba($color: #000000, $alpha: .2);
-      }
-      &:active {
-        background: rgba($color: #ccc, $alpha: .4);
-      }
-    }
-  } 
+    .main-theme__warpper,
+    .chat-theme__warapper {
+      width: 250px;
 
-  .pickers-wrapper{
-    margin-top: 100px;
-    display: flex;
-    width: 700px;
-    justify-content: space-between;
-    
-    .theme__title {
-      cursor: pointer;
-      margin-bottom: 20px;
-      padding: 10px 10px;
-      border-radius: 20px;
-      transition: .22s linear;
-
-      &:hover {
+      .theme__title {
+        cursor: default;
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 10px 10px;
+        border-radius: 20px;
+        transition: .22s linear;
         background-color: rgba($color: #000000, $alpha: .2);
       }
-      &:active {
-        background: rgba($color: #ccc, $alpha: .4);
-      }
     }
+
+    .chat-background__wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      .submitChatBackground {
+        margin-top: 20px;
+        outline: none;
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 20px;
+        border: none;  
+
+        &:hover {
+          background: rgba($color: #000000, $alpha: .2);
+        }
+        &:active {
+          background: rgba($color: #ccc, $alpha: .4);
+        }
+      }
+    } 
+    
+    
   }
 
 }
