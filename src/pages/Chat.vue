@@ -1,5 +1,5 @@
 <template>
-    <section class="chat-page" v-cloak @click="showerror">
+    <section class="chat-page" @click="showerror">
         <section v-if="chats" class="sidebar-wrapper">
             <div v-for="chat in chats" :key="chat.id" class="chat-wrapper">
                 <h4 class="chat__title">{{ chat.name }} &#8195;<span class="new-messege-counter">{{ messageCount }}</span></h4>
@@ -8,7 +8,7 @@
         </section>
         
         <section class="opened-chat-wrapper">
-            <article class="messages">
+            <article class="messages" :style="{ background: `url(${bgImage})` }"> <!-- align background -->
                 <Message v-for="mess in testMessages" :key="mess.text" :text="mess.text" :name="mess.name" :time="new Date().toLocaleTimeString()"/>
             </article>
             <MessageForm />
@@ -28,12 +28,12 @@ export default {
         const chats = reactive({});
         const windowHeight = computed(() => window.screen.height);
         const store = useStore();
+        const bgImage = computed(() => store.state.appearance.chatBackground.src);
         const testMessages = computed(() => store.state.messagesTest);
 
         //this value will be computed, then user get new message
         const messageCount = ref(1);
         
-
         onMounted(async () => {
             try {
                 const response = await fetch('https://jsonplaceholder.typicode.com/users');
@@ -53,7 +53,8 @@ export default {
             windowHeight,
             chats,
             testMessages,
-            messageCount
+            messageCount,
+            bgImage
         }
     },
     components: {

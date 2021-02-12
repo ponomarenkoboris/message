@@ -81,13 +81,14 @@ export default {
 
     // select photo (upload on servise)
     function uploadAndRenderImg(e) {
+      
       if (!e.target.files.length) return;
       if(!e.target.files[0].type.match('image')) return;
-      
+
       const reader = new FileReader();
       reader.onload = event => {
         background_src.value = event.target.result;
-        // TODO must be uploaded to localStorage
+        store.commit('changeChatBackground', background_src.value);
       }
       reader.readAsDataURL(e.target.files[0]);
     }

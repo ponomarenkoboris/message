@@ -1,11 +1,11 @@
 <template>
     <div class="main-layout">
-        <header class="header-wrapper">
+        <header class="header-wrapper" :style="{ background: `linear-gradient(to right, ${theme.leftColor}, ${theme.rightColor}` + ')' }">
             <div class="user-name-wrapper">
                 <h1 class="user-name">{{ userName }}</h1>
             </div>
             <div class="header-nav-wrapper">
-                <h1 @click="route('chat')" class="app_name" name="Chat">msbk</h1>
+                <h1 @click="route('chat')" class="app_name" name="Chat">ChatiK</h1>
                 <h3 @click="route('profile')" class="header__link">Profile</h3>
                 <h3 @click="route('appearence')" class="header__link">Appearence</h3>
                 <h3 @click="route('settings')" class="header__link">Settings</h3>
@@ -46,6 +46,7 @@ export default {
         
         const router = useRouter();
         const store = useStore();
+        const theme = computed(() => store.state.appearance.themes.main);
         const userName = computed(() => store.state.userTest.userName);
 
         // check autorization
@@ -63,6 +64,7 @@ export default {
             userName,
             hideMessege,
             showError,
+            theme
         }
     },
     components: {
@@ -79,7 +81,8 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding-right: 200px;
-    background-color: rgba($color: #000000, $alpha: .8);
+    padding-top: 10px;
+    padding-bottom: 10px;
 
     .user-name-wrapper {
         margin-left: 100px;
@@ -90,6 +93,7 @@ export default {
     .header-nav-wrapper {
         display: flex;
         align-items: center;
+        letter-spacing: 1px;
         .app_name, .header__link {
             margin-left: 10px;
             margin-right: 10px;

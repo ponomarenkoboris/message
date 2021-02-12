@@ -2,12 +2,12 @@ export const Appear = {
     state: {
         themes: {
             main: {
-                leftColor: '#000',
-                rightColor: '#000'
+                leftColor: '#333333',
+                rightColor: '#333333'
             },
             messege: {
-                leftColor: '#000',
-                rightColor: '#000'
+                leftColor: '#1a2e16',
+                rightColor: '#1a2e16'
             }
         },
         fonts: [
@@ -36,8 +36,10 @@ export const Appear = {
                 example: 'Example',
                 active: false
             }
-        ]
-        
+        ],
+        chatBackground: {
+            src: ''
+        },        
     },
     mutations: {
         changeFont(state, fontName) {
@@ -57,6 +59,11 @@ export const Appear = {
             state.themes.messege.leftColor = colorConfig.leftColor;
             state.themes.messege.rightColor = colorConfig.rightColor;
             console.log('messTheme: ', state.themes.messege);
-        }
-    }
+        },
+
+        changeChatBackground(state, uploadedSrc) {
+            console.log(uploadedSrc);
+            state.chatBackground.src = uploadedSrc;
+        }  
+    },
 } 

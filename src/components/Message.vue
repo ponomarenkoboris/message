@@ -1,5 +1,5 @@
 <template>
-  <article class="message__wrapper" :style="{ background: `linear-gradient(to right, ${colorConfig.leftColor}, ${colorConfig.rightColor})` }">
+  <article class="message__wrapper" :style="{ background: `linear-gradient(to right, ${colorConfig.leftColor}, ${colorConfig.rightColor}` + ')' }">
     <div class="message-header">
       <b class="message__time">Time: {{ time }}</b>
       <strong><h4 class="message__title">{{ name }}</h4></strong>

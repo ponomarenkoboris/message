@@ -1,5 +1,5 @@
 <template>
-  <section class="profile">
+  <section class="profile" :style="{ background: `linear-gradient(to right, ${theme.leftColor}, ${theme.rightColor}` + ')' }">
     <router-view></router-view>
       <section class="info-wrapper">
           <img :src="user.avatar_url || profile_src || ''" alt="user-avatar" class="info user-avatar">
@@ -19,13 +19,14 @@
 </template>
 
 <script>
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
   name: 'Profile',
   setup() {
     const store = useStore();
+    const theme = computed(() => store.state.appearance.themes.main);
     const user = reactive({...store.state.userTest});
     const profile_src = ref('');
 
@@ -68,6 +69,7 @@ export default {
     }
 
     return {
+      theme,
       user,
       chengeUserInfo,
       newUsername,
@@ -89,7 +91,6 @@ export default {
   flex-direction: column;
   align-items: center;
   color: #ffffff;
-  background-color: rgba($color: #000000, $alpha: .7);
   padding-bottom: 50px;
 
   .info-wrapper {

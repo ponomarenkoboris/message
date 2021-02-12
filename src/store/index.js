@@ -48,7 +48,7 @@ export default createStore({
     },
     addMessage(state, newMessage) {
       state.messagesTest.push(newMessage);
-    }    
+    }   
   },
   actions: {},
 });
