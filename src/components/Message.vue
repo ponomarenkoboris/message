@@ -1,5 +1,5 @@
 <template>
-  <article class="message__wrapper">
+  <article class="message__wrapper" :style="{ background: `linear-gradient(to right, ${colorConfig.leftColor}, ${colorConfig.rightColor})` }">
     <div class="message-header">
       <b class="message__time">Time: {{ time }}</b>
       <strong><h4 class="message__title">{{ name }}</h4></strong>
@@ -9,12 +9,24 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
 export default {
   name: 'Message',
   props: {
     name: String,
     text: String,
     time: String
+  },
+  setup() {
+
+    const store = useStore();
+    const colorConfig = computed(() => store.state.appearance.themes.messege);
+
+    return {
+      colorConfig
+    }
   }
 }
 </script>
@@ -22,7 +34,6 @@ export default {
 <style lang="scss" scoped>
 .message__wrapper {
   min-width: 300px;
-  background-color: rgba($color: #053038fa, $alpha: 1.0);
   color: #fff;
   margin-right: 30px;
   margin-bottom: 30px;

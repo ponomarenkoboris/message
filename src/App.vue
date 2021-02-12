@@ -12,7 +12,7 @@ export default {
   setup() {
     const store = useStore();
     const clientHieght = computed(() => window.screen.height);
-    const fontStyleObj = computed(() => store.state.fonts.find(item => item.active));
+    const fontStyleObj = computed(() => store.state.appearance.fonts.find(item => item.active));
 
     return {
       clientHieght,

@@ -15,6 +15,7 @@
         <h3>Selected Color</h3>
         <div :id="selectedArea" class="selected"></div>
         <button v-if="notDefaultColor" class="btn-submit-color" @click="submitColor">Pick color</button>
+        <p v-if="success" class="success">Picked!</p>
       </div>
     </div>
   </article>
@@ -22,6 +23,7 @@
 
 <script>
 import { reactive, ref } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
   name: 'ColorPicker',
@@ -34,7 +36,9 @@ export default {
   setup(props) {
     
     const theme = reactive({});
-    const notDefaultColor = ref(false)
+    const notDefaultColor = ref(false);
+    const success = ref(false);
+    const store = useStore();
 
     const changeColor = () => {
       const leftColor = document.querySelector(`#${props.firstColor}`).value;
@@ -47,14 +51,17 @@ export default {
     }
 
     const submitColor = () => {
-      if (props.id === 'main') console.log('main theme: ', theme);
-      if (props.id === 'message') console.log('messege theme: ', theme);
+      if (props.id === 'main') store.commit('changeMainTheme', theme);
+      if (props.id === 'message') store.commit('changeMessageTheme', theme);
+      success.value = true;
+      setTimeout(() => success.value = false, 1500);
     }
 
     return {
       changeColor,
       submitColor,
-      notDefaultColor
+      notDefaultColor,
+      success
     }
   }
 }
@@ -131,8 +138,16 @@ export default {
       &:active {
         background: rgba($color: #ccc, $alpha: .4);
       }
-
     }
+    .success {
+      margin-top: 10px;
+      font-size: .9rem;
+      padding: 1.5px 6px;
+      color: #fff;
+      background: rgba($color: #000000, $alpha: .6);
+      border-radius: 5px;
+    }
+
   }
   
 }

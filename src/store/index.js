@@ -1,6 +1,10 @@
 import { createStore } from "vuex";
-// test front end logic
+import { Appear } from './appearenceModul';
+
 export default createStore({
+  modules: { 
+    appearance: Appear 
+  },
   state: {
     userTest: {
       avatar_url: '',
@@ -24,33 +28,7 @@ export default createStore({
         text: 'kdjsk;lfgjsdjfd;'
       }
     ],
-    fonts: [
-      {
-        name: 'Roboto',
-        example: 'Example',
-        active: true
-      },
-      {
-        name: 'Lato',
-        example: 'Example',
-        active: false
-      },
-      {
-        name: 'Noto Sans JP',
-        example: 'Example',
-        active: false
-      },
-      {
-        name: 'Hammersmith One',
-        example: 'Example',
-        active: false
-      },
-      {
-        name: 'Raleway',
-        example: 'Example',
-        active: false
-      }
-    ]
+    
   },
   mutations: {
     changeAvatarUrl(state, newAvatar) {
@@ -70,14 +48,7 @@ export default createStore({
     },
     addMessage(state, newMessage) {
       state.messagesTest.push(newMessage);
-    },
-    changeFont(state, name) {
-      state.fonts.forEach(item => {
-        if (item.name === name) return item.active = true;
-        item.active = false;
-      });
-    }
+    }    
   },
   actions: {},
-  modules: {}
 });

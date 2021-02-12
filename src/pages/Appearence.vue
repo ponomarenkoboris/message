@@ -62,8 +62,8 @@ export default {
     
     const background_src = ref(clearImage);
     const store = useStore();
-    const fontName = computed(() => store.state.fonts.find(item => item.active).name);
-    const fonts = computed(() => store.state.fonts);
+    const fontName = computed(() => store.state.appearance.fonts.find(item => item.active).name);
+    const fonts = computed(() => store.state.appearance.fonts);
 
     // controllers
     const fontSelector = ref(false);
