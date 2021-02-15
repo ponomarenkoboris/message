@@ -93,11 +93,25 @@ export default {
             outline: none;
         }
         .submitBtn {
+            outline: none;
+            background-color: inherit;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
             margin-top: 50px;
             width: 70px;
             padding: 10px;
             font-size: 1rem;
             cursor: pointer;
+            transition: .22 ease-in-out;
+
+            &:hover {
+                background-color: rgba($color: #fff, $alpha: .1);
+            }
+
+            &:active {
+                background-color: rgba($color: #fff, $alpha: .4);
+            }
         }
     }
 }

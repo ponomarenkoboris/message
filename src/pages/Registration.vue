@@ -7,7 +7,9 @@
                     <input type="text" class="username" placeholder="Enter your name." v-model="userData.name">
                     <input type="text" class="userId" placeholder="Enter your Id." v-model="userData.userId">
                     <input type="text" class="userEmail" placeholder="Enter your email." v-model="userData.email">
-                    <p class="checkPolicy"><input type="radio" value="politicsAgrimant" id="politicsAgrimant"> You agree to the privacy policy.</p>
+                    <label class="checkPolicy">
+                        <input type="checkbox" value="politicsAgrimant" v-model="politicsAgrimant.checked" /> You agree to the privacy policy.
+                    </label>
                 </form>
                 <button class="registerBTN" @click="registartion">Create new user!</button>
             </article>
@@ -22,15 +24,19 @@ import { reactive } from 'vue';
 export default {
     name: 'Registration',
     setup() {
+        const politicsAgrimant = reactive({ checked: false })
         const userData = reactive({ name: '', email: '', userId: '' });
 
         async function registartion() {
-            await useRegistration(userData);
+            if (politicsAgrimant.checked) {
+                useRegistration(userData);
+            }
         }
 
         return {
             userData,
-            registartion
+            registartion,
+            politicsAgrimant
         }
     }
 }
@@ -87,6 +93,11 @@ $formItemMarginTop: 40px;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    cursor: pointer;
+                }
+
+                #politicsAgrimant {
+                    cursor: pointer;
                 }
             }
             .registerBTN {
@@ -94,6 +105,19 @@ $formItemMarginTop: 40px;
                 padding: 10px 30px;
                 font-size: 1rem;
                 cursor: pointer;
+                background: none;
+                color: #fff;
+                border: none;
+                border-radius: 20px;
+                outline: none;
+                transition: .22s ease-in-out;
+
+                &:hover {
+                    background-color: rgba($color: #fff, $alpha: .1)
+                }
+                &:active {
+                    background-color: rgba($color: #fff, $alpha: .5);
+                }
             }
         }
     }

@@ -1,5 +1,5 @@
 // TODO complite voice message function 
-function useVoice() {
+export function voiceMessage() {
     navigator.mediaDevices.getUserMedia({ audio: true })
         .then(stream => {
             const mediaRecorder = new MediaRecorder(stream);
