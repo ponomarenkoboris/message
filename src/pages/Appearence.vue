@@ -20,10 +20,7 @@
         <h3 class="theme__title">Main color theme</h3>
         <div class="theme__color-picker">
           <ColorPicker
-            :id="'main'" 
-            :firstColor="'firstPickerColor1'"
-            :secondColor="'firstPickerColor2'" 
-            :selectedArea="'firstPickerSelected'"
+            :id="'main'"
           />
         </div>
       </article>
@@ -31,7 +28,7 @@
         <div class="background-img__wrapper">
           <img :src="background_src" alt="Chat background" class="background-img">
         </div>
-        <input type="file" id="file" hidden @change="uploadAndRenderImg">
+        <input type="file" ref="inputFile" id="file" hidden @change="uploadAndRenderImg">
         <button class="submitChatBackground" @click="choosePhoto">Chat background image</button>
       </article>
       
@@ -40,9 +37,6 @@
         <div class="theme__color-picker">
           <ColorPicker
             :id="'message'"
-            :firstColor="'secondPickerColor1'"
-            :secondColor="'secondPickerColor2'" 
-            :selectedArea="'secondPickerSelected'"
           />
         </div>
       </article>
@@ -61,6 +55,7 @@ export default {
   setup() {
     
     const background_src = ref(clearImage);
+    const inputFile = ref(null);
     const store = useStore();
     const fontName = computed(() => store.state.appearance.fonts.find(item => item.active).name);
     const fonts = computed(() => store.state.appearance.fonts);
@@ -74,9 +69,8 @@ export default {
     // select photo (click on button)
     function choosePhoto() {
       const accept = ['.png', '.jpg', '.jpeg'];
-      const input = document.querySelector('#file');
-      input.setAttribute('accept', accept.join(','));
-      input.click();
+      inputFile.value.setAttribute('accept', accept.join(','));
+      inputFile.value.click();
     }
 
     // select photo (upload on servise)
@@ -106,7 +100,8 @@ export default {
       fontName,
       fonts,
       fontHandler,
-      selectorHandler
+      selectorHandler,
+      inputFile
     }
   },
   components: {

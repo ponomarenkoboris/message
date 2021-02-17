@@ -1,19 +1,22 @@
 <template>
   <section class="profile" :style="{ background: `linear-gradient(to right, ${theme.leftColor}, ${theme.rightColor}` + ')' }">
-    <router-view></router-view>
-      <section class="info-wrapper">
-          <img :src="user.avatar_url || profile_src || ''" alt="user-avatar" class="info user-avatar">
-          <input type="file" class="info file" id="file" @change="uploadAndRenderImg"/>
-          <div class="info file__btn">
-            <button class="getImg" @click="choosePhoto">Choose new photo</button>
-          </div>
-          <input type="text" class="info username" v-model="newUsername" :placeholder="user.userName">
-          <input type="text" class="info userid" v-model="newUserId" :placeholder="'@' + user.userId">
-          <input type="text" class="info user-email" v-model="newUserEmail" :placeholder="user.userEmail">
-          <input type="text" class="info user-phone-number" v-model="newPhoneNumber" :placeholder="user.phoneNumber">
-          <div class="btn-wrapper">
-            <button class="submitBtn" @click="chengeUserInfo">Submit Changes</button>
-          </div>
+      <section class="info-wrapper" :style="{  height: clientHeight - 153 + 'px', width: clientWidth + 'px' }">
+          <article class="profile-avatar-wrapper">
+            <img :src="user.avatar_url || profile_src" alt="user-avatar" class="info user-avatar">
+            <input type="file" class="info file" ref="inputFile" id="file" @change="uploadAndRenderImg"/>
+            <div class="info file__btn">
+              <button class="getImg" @click="choosePhoto">Choose new photo</button>
+            </div>
+          </article>
+          <article class="main-info-wrapper">
+            <input type="text" class="info username" v-model="newUsername" :placeholder="user.userName">
+            <input type="text" class="info userid" v-model="newUserId" :placeholder="'@' + user.userId">
+            <input type="text" class="info user-email" v-model="newUserEmail" :placeholder="user.userEmail">
+            <input type="text" class="info user-phone-number" v-model="newPhoneNumber" :placeholder="user.phoneNumber">
+            <div class="btn-wrapper">
+              <button class="submitBtn" @click="chengeUserInfo">Submit Changes</button>
+            </div>
+          </article>
       </section>
   </section>
 </template>
@@ -27,8 +30,11 @@ export default {
   setup() {
     const store = useStore();
     const theme = computed(() => store.state.appearance.themes.main);
+    const clientHeight = computed(() => document.documentElement.clientHeight);
+    const clientWidth = computed(() => document.documentElement.clientWidth);
     const user = reactive({...store.state.userTest});
     const profile_src = ref('');
+    const inputFile = ref(null);
 
     // varialble to bind with v-model
     const newUsername = ref('');
@@ -52,9 +58,8 @@ export default {
     // select photo (click on button)
     function choosePhoto() {
       const accept = ['.png', '.jpg', '.jpeg'];
-      const input = document.querySelector('#file');
-      input.setAttribute('accept', accept.join(','));
-      input.click();
+      inputFile.value.setAttribute('accept', accept.join(','));
+      inputFile.value.click();
     }
     // select photo (upload on servise)
     function uploadAndRenderImg(e) {
@@ -69,6 +74,8 @@ export default {
     }
 
     return {
+      clientWidth,
+      clientHeight,
       theme,
       user,
       chengeUserInfo,
@@ -78,24 +85,38 @@ export default {
       newPhoneNumber,
       choosePhoto,
       uploadAndRenderImg,
-      profile_src
+      profile_src,
+      inputFile
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
+* {
+  overflow: hidden;
+}
 .profile{
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #ffffff;
-  padding-bottom: 50px;
 
   .info-wrapper {
+    padding-top: 50px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+
+    .profile-avatar-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-info-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-left: 100px;
+    }
 
     .info {
       margin: 40px 50px;

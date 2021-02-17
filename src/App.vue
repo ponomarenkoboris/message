@@ -11,11 +11,9 @@ import { useStore } from 'vuex';
 export default {
   setup() {
     const store = useStore();
-    const clientHieght = computed(() => window.screen.height);
     const fontStyleObj = computed(() => store.state.appearance.fonts.find(item => item.active));
 
     return {
-      clientHieght,
       fontStyleObj
     }
   }

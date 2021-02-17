@@ -1,19 +1,19 @@
 <template>
   <article class="container" :id="id">
-    <div class="info">
+    <div class="info" ref="info">
       <div class="input-wrapper">
         <div class="left-side-color">
-          <input type="color" :id="firstColor" class="leftColor" @input="changeColor"/>
+          <input type="color" ref="leftColor" class="leftColor" @input="changeColor"/>
           <p>Left side</p>
         </div>
         <div class="right-side-color">
-          <input type="color" :id="secondColor" class="rightColor" @input="changeColor"/>
+          <input type="color" ref="rightColor" class="rightColor" @input="changeColor"/>
           <p>Right side</p>
         </div>
       </div>
       <div class="change-wrapper">
         <h3>Selected Color</h3>
-        <div :id="selectedArea" class="selected"></div>
+        <div class="selected" ref="selected"></div>
         <button v-if="notDefaultColor" class="btn-submit-color" @click="submitColor">Pick color</button>
         <p v-if="success" class="success">Picked!</p>
       </div>
@@ -28,26 +28,23 @@ import { useStore } from 'vuex';
 export default {
   name: 'ColorPicker',
   props: {
-    id: String,
-    firstColor: String,
-    secondColor: String,
-    selectedArea: String
+    id: String
   },
   setup(props) {
     
     const theme = reactive({});
     const notDefaultColor = ref(false);
     const success = ref(false);
+    const leftColor = ref(null);
+    const rightColor = ref(null);
+    const selected = ref(null);
     const store = useStore();
 
     const changeColor = () => {
-      const leftColor = document.querySelector(`#${props.firstColor}`).value;
-      const rightColor = document.querySelector(`#${props.secondColor}`).value;
       notDefaultColor.value = true;
-      const selected = document.querySelector(`#${props.selectedArea}`);
-      selected.style.background = "linear-gradient(to right, " + leftColor + ", " + rightColor + ")";
-      theme.leftColor = leftColor;
-      theme.rightColor = rightColor;
+      selected.value.style.background = "linear-gradient(to right, " + leftColor.value.value + ", " + rightColor.value.value + ")";
+      theme.leftColor = leftColor.value.value;
+      theme.rightColor = rightColor.value.value;
     }
 
     const submitColor = () => {
@@ -58,10 +55,13 @@ export default {
     }
 
     return {
+      selected,
       changeColor,
       submitColor,
       notDefaultColor,
-      success
+      success,
+      leftColor,
+      rightColor
     }
   }
 }
