@@ -30,10 +30,6 @@
     "sass-loader": "^10.1.1",
     "vue-jest": "^3.0.4"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ponomarenkoboris/msb.git"
-  },
   "keywords": [
     "messenger",
     "vue.js",
