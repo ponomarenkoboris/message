@@ -9,8 +9,8 @@
       </div>
     </section>
     <section class="open__chat-wrapper">
-      <div class="message-wrapper">
-        <div class="">message Component</div>
+      <div class="message-wrapper" v-for="(mess, idx) in messages" :key="idx">
+        <Message :name="mess.name" :text="mess.text" :owner="false" :date="Date.now().toString()" />
       </div>
       <div class="message__form-wrapper">
         <MessageForm />
@@ -20,7 +20,9 @@
 </template>
 
 <script>
-import MessageForm from '~/components/MessageForm'
+import MessageForm from '~/components/MessageForm';
+import Message from '~/components/Message';
+
 export default {
   async asyncData({ $axios }) {
     try {
@@ -33,19 +35,28 @@ export default {
   computed: {
     pageHeight() {
       return document.documentElement.clientHeight + 'px';
+    },
+    messages() {
+      return this.$store.getters['testMess/messages'];
     }
   },
   components: {
-    MessageForm
+    MessageForm,
+    Message
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .chat-wrapper {
-    display: flex;
+    // display: flex;
     
     .chat__sidebar-wrapper {
+      position: relative;
+      z-index: 1;
+      left: 0;
+      bottom: 0;
+      top: 0;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
@@ -67,10 +78,22 @@ export default {
       }
     }
     .open__chat-wrapper {
-      width: 100%;
+      position: absolute;
+      left: 360px;
+      top: 99px;
+      right: 0px;
+      bottom: 66px;
+      width: 500px;
+      padding: 15px 30px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      overflow-y: scroll;
+
+      .message-wrapper {
+        margin-top: 15px;
+        width: 100%;
+      }
     }
   }
 </style>

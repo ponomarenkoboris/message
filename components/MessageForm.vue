@@ -15,7 +15,7 @@ export default {
     }),
     methods: {
         submitMessage() {
-            // this.$store.dispatch('logout');
+            this.$store.commit('testMess/addMessage', {name: 'bor', text: this.messageText });
             this.messageText = '';
         }
     }
@@ -24,6 +24,10 @@ export default {
 
 <style lang="scss" scoped>
 .message__form-wrapper {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 360px;
     display: flex;
     justify-content: space-around;
     padding: 15px 50px;

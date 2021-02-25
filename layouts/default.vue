@@ -1,5 +1,5 @@
 <template>
-  <main class="default__layout-wrapper" :style="{ fontFamily: font, height: pageHeigth }">
+  <main class="default__layout-wrapper" :style="{ fontFamily: font }">
     <NavBar />
     <Nuxt />
   </main>
@@ -14,15 +14,13 @@ export default {
     font() {
       return this.$store.getters['appearence/font'].name
     },
-    pageHeigth() {
-      return document.documentElement.clientHeight + 'px'
-    }
   },
   // middleware: ['auth'],
 }
 </script>
-<style lang="scss">
+TODO complite debug style 
+<style lang="scss" scoped>
   .default__layout-wrapper {
-    // overflow: hidden;
+    overflow: hidden;
   }
 </style>

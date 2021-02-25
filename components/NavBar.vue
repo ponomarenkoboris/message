@@ -34,61 +34,64 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header-wrapper {
-    display: flex;
-    margin: 0 auto;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-
-    .user__name-wrapper {
+.container {
+    .header-wrapper {
         display: flex;
+        margin: 0 auto;
+        justify-content: space-between;
         align-items: center;
-        margin-left: 10px;
-        color: #fff;
-        cursor: default;
+        padding-right: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
 
-        .img-wrapper {
-            width: 70px;
-            height: 70px;
-            overflow: hidden;
-            border-radius: 50%;
+        .user__name-wrapper {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            color: #fff;
+            cursor: default;
 
-            .userAvatar {
-                background-color: inherit;                
+            .img-wrapper {
+                width: 70px;
+                height: 70px;
+                overflow: hidden;
+                border-radius: 50%;
+
+                .userAvatar {
+                    background-color: inherit;                
+                }
+            }
+
+            .userName {
+                margin-left: 20px;
             }
         }
 
-        .userName {
-            margin-left: 20px;
-        }
-    }
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            letter-spacing: 1px;
 
-    .nav-wrapper {
-        display: flex;
-        align-items: center;
-        letter-spacing: 1px;
+            .header__link {
+                margin-left: 10px;
+                margin-right: 10px;
+                cursor: pointer;
+                padding: 30px;
+                color: #fff;
+                border-radius: 20px;
+                text-decoration: none;
+                transition: background-color .22s;
 
-        .header__link {
-            margin-left: 10px;
-            margin-right: 10px;
-            cursor: pointer;
-            padding: 30px;
-            color: #fff;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: background-color .22s;
+                &:hover {
+                    background-color: rgba($color: #fff, $alpha: .2);
+                }
+            }
 
-            &:hover {
+            .active {
                 background-color: rgba($color: #fff, $alpha: .2);
             }
         }
-
-        .active {
-            background-color: rgba($color: #fff, $alpha: .2);
-        }
     }
 }
+
 </style>
