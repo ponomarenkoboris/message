@@ -56,9 +56,6 @@ export default {
     port: 80,
     host: '192.168.1.68'
   },
-  serverMiddleware: [ 
-    { path: '/server', handler: '~/server/init.js'}
-  ],
   env: {
     baseUrl: process.env.BASE_URL ||  'http://192.168.1.68/'
   },
