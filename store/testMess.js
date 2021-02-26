@@ -2,23 +2,28 @@ export const state = () => ({
     messages: [
         {
             name: 'Boris',
-            text: 'hellow world!!'
+            text: 'hellow world!!',
+            owner: false
         },
         {
             name: 'Farhat',
-            text: 'hellow dsajfjhgsdfjk!!'
+            text: 'hellow dsajfjhgsdfjk!!',
+            owner: false
         },
         {
             name: 'Ganop',
-            text: 'hellow worsgfdfgsgld!!'
+            text: 'hellow worsgfdfgsgld!!',
+            owner: false
         },
         {
             name: 'Rick',
-            text: `hellow !!`
+            text: `hellow !!`,
+            owner: false
         },
         {
             name: 'Josh',
-            text: 'sdckjlsdafl;j world!!'
+            text: 'sdckjlsdafl;j world!!',
+            owner: false
         }
     ],
 });

@@ -1,6 +1,6 @@
 <template>
     <header class="container">
-        <section class="header-wrapper" :style="{ background: `linear-gradient(to right, ${theme.leftColor}, ${theme.rightColor}` + ')' }">
+        <section class="header-wrapper" :style="{ background: theme }">
             <div class="user__name-wrapper">
                 <div class="img-wrapper">
                     <img v-if="avatarUrl" :src="avatarUrl" alt="Your avatar" class="userAvatar">
@@ -8,7 +8,7 @@
                 <h1 class="userName">{{ userName }}</h1>
             </div>
             <nav class="nav-wrapper">
-                <nuxt-link active-class="active" to="/messa/chat" class="header__link">ChatiK</nuxt-link>
+                <nuxt-link active-class="active" to="/messa/chat" class="header__link">MessA</nuxt-link>
                 <nuxt-link active-class="active" to="/messa/profile" class="header__link">Profile</nuxt-link>
                 <nuxt-link active-class="active" to="/messa/appearence" class="header__link">Appearence</nuxt-link>
                 <nuxt-link active-class="active" to="/messa/settings" class="header__link">Settings</nuxt-link>
@@ -21,7 +21,9 @@
 export default {
     computed: {
         theme() {
-            return this.$store.getters['appearence/mainTheme'];
+            const colorTheme = this.$store.getters['appearence/secondaryTheme'];
+            const colorStyle = `linear-gradient(to right, ${colorTheme.leftColor}, ${colorTheme.rightColor}` + ')'
+            return colorStyle
         },
         userName() {
             return this.$store.getters.userName;

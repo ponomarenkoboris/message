@@ -3,7 +3,7 @@ export const state = () => ({
         name: 'Boris Ponomarenko',
         phone: '89032682960',
         socialId: 'borpon4783',
-        email: 'blalbalbla',
+        email: 'boiris@gmail.com',
         avatar: '',
     },
     token: null

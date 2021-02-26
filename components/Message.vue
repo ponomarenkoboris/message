@@ -1,6 +1,6 @@
 <template>
-    <article class="message-wrapper">
-        <div class="message">
+    <article class="message-container">
+        <div ref="message" class="message" :style="{ background: theme }">
             <small><strong>{{ name }}</strong></small>
             <p>{{ text }}</p>
         </div>
@@ -14,21 +14,35 @@ export default {
         date: String,
         name: String,
         text: String,
-        ownre: {
+        owner: {
             type: Boolean,
             default: false
+        }
+    },
+    mounted() {
+        if (this.$props.owner) {
+            this.$refs.message.style = 'end' 
+        }
+    },
+    computed: {
+        theme() {
+            const colorTheme = this.$store.getters['appearence/secondaryTheme']; 
+            const colorStyle = `linear-gradient(to right, ${colorTheme.leftColor}, ${colorTheme.rightColor}` + ')'
+            return colorStyle;
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.message {
-    left: 30px;
-    border-radius: 20px;
-    padding: 3px 5px;
+.message-container {
     width: 300px;
     max-width: 500px;
+}
+.message {
+    border-radius: 20px;
+    padding: 3px 5px;
     background: red;
+    color: #fff;
 }
 </style>

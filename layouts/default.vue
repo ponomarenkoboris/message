@@ -20,7 +20,8 @@ export default {
 </script>
 TODO complite debug style 
 <style lang="scss" scoped>
-  .default__layout-wrapper {
-    overflow: hidden;
-  }
+* {overflow: hidden}
+  // .default__layout-wrapper {
+  //   overflow: hidden;
+  // }
 </style>

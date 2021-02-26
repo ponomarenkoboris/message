@@ -1,11 +1,11 @@
 <template>
-  <section class="message__form-wrapper">
-        <div class="input__form">
+    <section class="message__form-wrapper" :style="{ background: theme }">
+        <div ref="inputForm" class="input__form">
             <input class="message__input" type="text" v-model="messageText">
             <button class="voice__input" id="voice">Voice</button>
         </div>
         <button class="sumbit__message" @click="submitMessage">Send</button>
-  </section>
+    </section>
 </template>
 
 <script>
@@ -13,10 +13,26 @@ export default {
     data: () => ({
         messageText: ''
     }),
+    computed: {
+        theme() {
+            const colorTheme = this.$store.getters['appearence/secondaryTheme'];
+            const colorStyle = `linear-gradient(to right, ${colorTheme.leftColor}, ${colorTheme.rightColor}` + ')';
+            return colorStyle;
+        }
+    },
     methods: {
         submitMessage() {
-            this.$store.commit('testMess/addMessage', {name: 'bor', text: this.messageText });
-            this.messageText = '';
+            if (this.messageText.trim()) {
+                this.$store.commit('testMess/addMessage', {name: 'bor', text: this.messageText });
+                this.messageText = '';
+            } else {
+                this.$refs.inputForm.style.border = '1px solid red';
+                setTimeout(() => {
+                    this.$refs.inputForm.style.border = '1px solid rgba(0, 0, 0, 0)';
+                    this.$refs.inputForm.style.borderBottom = '1px solid #fff';
+                }, 300);
+                return this.messageText = '';
+            }
         }
     }
 }

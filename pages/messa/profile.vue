@@ -1,5 +1,5 @@
 <template>
-    <section class="profile" :style="{ background: `linear-gradient(to right, ${theme.leftColor}, ${theme.rightColor}` + ')' }" >
+    <section class="profile" :style="{ background: theme }" >
         <section class="info-wrapper">
             <article class="profile-avatar-wrapper">
                 <img :src="userData.avatar || userPhotoNew ||'' " alt="User avatar" class="info user-avatar">
@@ -13,12 +13,11 @@
                 <input type="text" v-model="userId" class="info userid" :placeholder="'@' + userData.socialId">
                 <input type="text" v-model="userEmail" class="info user-email" :placeholder="userData.email">
                 <input type="text" v-model="userPhone" class="info user-phone-number" :placeholder="userData.phone">
+                <div class="btn-wrapper">
+                    <button class="submit-info">Submit Changes</button>
+                </div>
             </article>
-            <div class="btn-wrapper">
-                <button class="submit-info">Submit Changes</button>
-            </div>
         </section>
-
     </section>
 </template>
 <script>
@@ -33,7 +32,9 @@ export default {
     }),
     computed: {
         theme() {
-            return this.$store.getters['appearence/mainTheme'];
+            const colorTheme = this.$store.getters['appearence/mainTheme'];
+            const colorStyle = `linear-gradient(to right, ${colorTheme.leftColor}, ${colorTheme.rightColor}` + ')';
+            return colorStyle
         },
         userData() {
             return this.$store.getters.data
@@ -65,14 +66,16 @@ export default {
 }
 .profile {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     color: #fff;
+    height: 838px;
 
     .info-wrapper {
-        padding-top: 50px;
+        width: 50%;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        align-items: center;
 
         .profile-avatar-wrapper {
             display: flex;
@@ -82,7 +85,6 @@ export default {
         .main-info-wrapper {
             display: flex;
             flex-direction: column;
-            margin-left: 100px;
         }
 
         .info {
@@ -94,6 +96,10 @@ export default {
             border-bottom: 1px solid #fff;
             background-color: inherit;
             color: rgba($color: #ffffff, $alpha: 1.0); 
+        }
+
+        .user-avatar {
+            margin: 0;
         }
 
         .file__btn{

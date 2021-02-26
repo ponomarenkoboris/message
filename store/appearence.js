@@ -65,13 +65,13 @@ export const mutations = {
 
 export const getters = {
     mainTheme: state => {
-        const theme = JSON.parse(sessionStorage.getItem('MainColor'));
-        if (theme) return theme;
+        // const theme = JSON.parse(sessionStorage.getItem('MainColor'));
+        // if (theme) return theme;
         return state.mainTheme
     },
-    messageTheme: state => {
-        const theme = JSON.parse(sessionStorage.getItem('MessColor'));
-        if (theme) return theme;
+    secondaryTheme: state => {
+        // const theme = JSON.parse(sessionStorage.getItem('MessColor'));
+        // if (theme) return theme;
         return state.messageTheme;
     },
     font: state => state.fonts.find(item => item.active),

@@ -1,6 +1,8 @@
 const consola = require('consola');
 const { Nuxt, Builder } = require('nuxt');
-const { app, server } = require('./app');
+// const { app, server } = require('./app'); // when socket will be ready
+const app = require('express')();
+const server = require('http').createServer(app);
 
 let config = require('../nuxt.config');
 config.dev = !(process.env.NODE_ENV === 'production');
